@@ -1,0 +1,55 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        primary: '#a04100',
+        'primary-container': '#ff6b00',
+        'on-primary-container': '#572000',
+        'surface': '#f8fafb',
+        'surface-low': '#f2f4f5',
+        'surface-high': '#e6e8e9',
+        'surface-highest': '#e1e3e4',
+        'surface-lowest': '#ffffff',
+        'on-surface': '#191c1d',
+        secondary: '#586062',
+        'outline-variant': '#e2bfb0',
+        'surface-container': '#eceeef',
+        'surface-dim': '#d8dadb',
+      },
+      fontFamily: {
+        headline: ['Space Grotesk', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        label: ['"JetBrains Mono"', 'monospace'],
+      },
+      borderRadius: {
+        DEFAULT: '0px',
+        none: '0px',
+        sm: '0px',
+        md: '0px',
+        lg: '0px',
+        xl: '0px',
+        '2xl': '0px',
+        full: '9999px',
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.5s ease forwards',
+        'slide-up': 'slideUp 0.6s ease forwards',
+        'slide-in-left': 'slideInLeft 0.5s ease forwards',
+        'blink': 'blink 1.2s ease infinite',
+        'scan': 'scan 3s ease-in-out infinite',
+      },
+      keyframes: {
+        fadeIn: { from: { opacity: '0' }, to: { opacity: '1' } },
+        slideUp: { from: { opacity: '0', transform: 'translateY(24px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        slideInLeft: { from: { opacity: '0', transform: 'translateX(-20px)' }, to: { opacity: '1', transform: 'translateX(0)' } },
+        blink: { '0%,100%': { opacity: '1' }, '50%': { opacity: '0' } },
+        scan: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(100%)' } },
+      },
+    },
+  },
+  plugins: [],
+}
