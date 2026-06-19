@@ -630,7 +630,7 @@ export function Achievements({ achievements }) {
    TECH STACK
 ═══════════════════════════════════════════ */
 export function TechStack({ profile }) {
-  const skills = profile?.skills || [];
+  const skills = Array.isArray(profile?.skills) ? profile.skills : [];
   if (!skills.length) return null;
 
   const CHIP_THEMES = [

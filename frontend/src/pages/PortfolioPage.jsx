@@ -53,6 +53,18 @@ function LoadingScreen() {
   );
 }
 
+/* Normalize an API response into an array, regardless of whether the
+   backend returns a raw array, { data: [...] }, or { success, data: [...] }. */
+function asArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value && typeof value === 'object') {
+    if (Array.isArray(value.data)) return value.data;
+    const firstArray = Object.values(value).find((v) => Array.isArray(v));
+    if (firstArray) return firstArray;
+  }
+  return [];
+}
+
 export default function PortfolioPage() {
   const [profile,      setProfile]      = useState(null);
   const [experience,   setExperience]   = useState([]);
@@ -73,11 +85,11 @@ export default function PortfolioPage() {
       api.get('/blogs'),
     ]).then(([p, e, a, pr, pl, b]) => {
       if (p.status  === 'fulfilled') setProfile(p.value.data);
-      if (e.status  === 'fulfilled') setExperience(e.value.data || []);
-      if (a.status  === 'fulfilled') setAchievements(a.value.data || []);
-      if (pr.status === 'fulfilled') setProjects(pr.value.data || []);
-      if (pl.status === 'fulfilled') setPlatforms(pl.value.data || []);
-      if (b.status  === 'fulfilled') setBlogs(b.value.data || []);
+      if (e.status  === 'fulfilled') setExperience(asArray(e.value.data));
+      if (a.status  === 'fulfilled') setAchievements(asArray(a.value.data));
+      if (pr.status === 'fulfilled') setProjects(asArray(pr.value.data));
+      if (pl.status === 'fulfilled') setPlatforms(asArray(pl.value.data));
+      if (b.status  === 'fulfilled') setBlogs(asArray(b.value.data));
     }).finally(() => setLoading(false));
   }, []);
 
